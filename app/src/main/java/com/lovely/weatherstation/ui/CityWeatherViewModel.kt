@@ -1,4 +1,8 @@
 package com.lovely.weatherstation.ui
 
-class CityWeatherViewModel {
-}
+import androidx.lifecycle.ViewModel
+import com.lovely.weatherstation.datasource.Repository
+
+class CityWeatherViewModel(
+    private val repository: Repository
+) : ViewModel()
