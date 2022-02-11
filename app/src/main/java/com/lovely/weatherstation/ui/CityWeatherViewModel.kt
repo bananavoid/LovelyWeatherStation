@@ -2,15 +2,15 @@ package com.lovely.weatherstation.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.lovely.weatherstation.datasource.Repository
-import com.lovely.weatherstation.datasource.model.Weather
 import kotlinx.coroutines.Dispatchers
 
 class CityWeatherViewModel(
-    private val cityName: String,
+    cityName: String,
     private val cityWoeid: Long,
     private val repository: Repository
 ) : ViewModel() {
@@ -25,5 +25,13 @@ class CityWeatherViewModel(
             Log.e("CityWeatherViewModel", "$e")
         }
     }
-    val weatherForecast: LiveData<Weather> = _weatherForecast
+    val weatherIcon: MediatorLiveData<String> = MediatorLiveData<String>().apply {
+        addSource(_weatherForecast) { weather ->
+            weather.weatherStateAbbr?.let {
+                postValue(
+                    repository.getWeatherIconUrl(it)
+                )
+            }
+        }
+    }
 }

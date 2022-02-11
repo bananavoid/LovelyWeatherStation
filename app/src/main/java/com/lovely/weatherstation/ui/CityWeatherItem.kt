@@ -3,7 +3,11 @@ package com.lovely.weatherstation.ui
 import android.graphics.Color
 import android.text.Layout
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -31,7 +35,7 @@ class CityWeatherItem(
         ) {
             Row {
                 Image(
-                    painter = painterResource(id = viewModel.weatherIcon),
+                    painter = painterResource(id = viewModel.weatherIcon.value),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
