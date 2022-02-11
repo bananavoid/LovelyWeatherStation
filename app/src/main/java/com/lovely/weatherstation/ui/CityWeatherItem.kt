@@ -1,7 +1,5 @@
 package com.lovely.weatherstation.ui
 
-import android.graphics.Color
-import android.text.Layout
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -30,7 +29,7 @@ class CityWeatherItem(
                 .padding(horizontal = 8.dp, vertical = 8.dp)
                 .fillMaxWidth(),
             elevation = 2.dp,
-            backgroundColor = Color.White,
+            backgroundColor = androidx.compose.ui.graphics.Color.White,
             shape = RoundedCornerShape(corner = CornerSize(16.dp))
         ) {
             Row {
@@ -47,7 +46,7 @@ class CityWeatherItem(
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth()
-                        .align(Layout.Alignment.CenterVertically)
+                        .align(CenterVertically)
                 ) {
                     Text(text = viewModel.name.value.orEmpty(), style = typography.h6)
                 }
