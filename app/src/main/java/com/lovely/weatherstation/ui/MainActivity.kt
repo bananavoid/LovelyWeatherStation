@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -41,24 +42,24 @@ fun WeatherStationApp(
 ) {
     Scaffold(
         content = {
-            FavoriteCitiesContent(viewModel)
+            CitiesWeatherContent(viewModel)
         }
     )
 }
 
 @Composable
-fun FavoriteCitiesContent(
+fun CitiesWeatherContent(
     viewModel: MainActivityViewModel
 ) {
-    val cities = remember { viewModel.cities.value }
+    val cityForecasts = remember { viewModel.cityForecasts.value }
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
     ) {
         items(
-            count = cities?.size ?: 0,
+            items = cityForecasts.orEmpty(),
             itemContent = {
-                CityWeatherViewModel(
-                    repository = viewModel.repository
+                CityWeatherItem(
+                    viewModel = it
                 )
             }
         )
@@ -69,6 +70,5 @@ fun FavoriteCitiesContent(
 @Composable
 fun DefaultPreview() {
     WeatherStationTheme {
-
     }
 }

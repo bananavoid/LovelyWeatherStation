@@ -5,7 +5,7 @@ import com.lovely.weatherstation.datasource.model.City
 interface HasCityApi {
 
     fun getFavoriteCities(): List<City> {
-        return listOf<City>(
+        return listOf(
             City(
                 woeid = 890869,
                 name = "Gothenburg"

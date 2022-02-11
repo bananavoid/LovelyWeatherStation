@@ -4,16 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lovely.weatherstation.datasource.Repository
-import com.lovely.weatherstation.datasource.model.City
 
 class MainActivityViewModel(
-    internal val repository: Repository
+    private val repository: Repository
 ) : ViewModel() {
 
-    private val _cities = MutableLiveData<List<City>>().apply {
+    private val _cityForecasts = MutableLiveData<List<CityWeatherViewModel>>().apply {
         postValue(
-            repository.getFavoriteCities()
+            repository.getFavoriteCities().map { city ->
+                CityWeatherViewModel(
+                    cityName = city.name,
+                    cityWoeid = city.woeid,
+                    repository = repository
+                )
+            }
         )
     }
-    val cities: LiveData<List<City>> = _cities
+    val cityForecasts: LiveData<List<CityWeatherViewModel>> = _cityForecasts
 }
