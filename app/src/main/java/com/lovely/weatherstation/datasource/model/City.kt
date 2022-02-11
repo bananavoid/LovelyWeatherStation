@@ -1,4 +1,4 @@
-package com.lovely.weatherstation.datasource
+package com.lovely.weatherstation.datasource.model
 
 data class City(
     val woeid: Long,

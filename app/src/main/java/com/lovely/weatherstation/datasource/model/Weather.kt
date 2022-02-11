@@ -1,4 +1,4 @@
-package com.lovely.weatherstation.datasource
+package com.lovely.weatherstation.datasource.model
 
 import com.google.gson.annotations.SerializedName
 

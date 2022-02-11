@@ -1,5 +1,7 @@
 package com.lovely.weatherstation.datasource
 
+import com.lovely.weatherstation.datasource.model.City
+
 interface HasCityApi {
 
     fun getFavoriteCities(): List<City> {

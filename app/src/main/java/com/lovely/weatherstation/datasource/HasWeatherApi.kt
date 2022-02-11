@@ -1,6 +1,7 @@
 package com.lovely.weatherstation.datasource
 
 import com.lovely.weatherstation.api.WeatherService
+import com.lovely.weatherstation.datasource.model.Weather
 
 interface HasWeatherApi {
 
