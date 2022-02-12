@@ -20,7 +20,7 @@ import coil.compose.rememberImagePainter
 
 @Composable
 fun CityWeatherItem(
-    uiModel: CityWeatherItemModel
+    uiModel: CityWeatherItemUiModel
 ) {
     Card(
         modifier = Modifier
@@ -35,11 +35,20 @@ fun CityWeatherItem(
                 .padding(16.dp)
                 .fillMaxHeight()
         ) {
-            Text(text = uiModel.cityName, style = typography.h6, color = Color.Black)
+            Text(
+                text = uiModel.cityName,
+                style = typography.h6,
+                color = Color.Black
+            )
             Text(
                 text = uiModel.weatherStateName.orEmpty(),
                 style = typography.body2,
                 color = Color.Gray
+            )
+            Text(
+                text = uiModel.temperature.orEmpty(),
+                style = typography.subtitle2,
+                color = Color.Black
             )
         }
         Column(

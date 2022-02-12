@@ -2,10 +2,12 @@ package com.lovely.weatherstation.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.lovely.weatherstation.datasource.Repository
 import com.lovely.weatherstation.datasource.model.Weather
+import kotlin.math.roundToInt
 
 // TODO fix request to use forecastDate instead of rely on index
 private const val TOMORROW_DAY_INDEX = 1
@@ -15,9 +17,10 @@ class MainActivityViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
+    val isLoading = MutableLiveData(true)
     private val cities = repository.getFavoriteCities()
     private val _forecasts = liveData {
-        with(mutableListOf<CityWeatherItemModel>()) {
+        with(mutableListOf<CityWeatherItemUiModel>()) {
             cities.forEach { city ->
                 var weather: Weather? = null
                 try {
@@ -27,18 +30,18 @@ class MainActivityViewModel(
                 }
 
                 add(
-                    CityWeatherItemModel(
+                    CityWeatherItemUiModel(
                         cityName = city.name,
                         weatherIconUrl = repository.getWeatherIconUrl(weather?.weatherStateAbbr),
                         weatherStateName = weather?.weatherStateName,
-                        minTemperature = weather?.minTemperature,
-                        maxTemperature = weather?.maxTemperature
+                        temperature = weather?.temperature?.let { "${it.roundToInt()}°" }
                     )
                 )
             }
 
             emit(this.toList())
+            isLoading.postValue(false)
         }
     }
-    val forecasts: LiveData<List<CityWeatherItemModel>> = _forecasts
+    val forecasts: LiveData<List<CityWeatherItemUiModel>> = _forecasts
 }

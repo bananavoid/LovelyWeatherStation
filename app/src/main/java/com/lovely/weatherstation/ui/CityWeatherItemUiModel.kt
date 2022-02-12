@@ -1,9 +1,8 @@
 package com.lovely.weatherstation.ui
 
-class CityWeatherItemModel(
+data class CityWeatherItemUiModel(
     val cityName: String,
     val weatherIconUrl: String,
     val weatherStateName: String?,
-    val minTemperature: Float?,
-    val maxTemperature: Float?
+    val temperature: String?
 )
