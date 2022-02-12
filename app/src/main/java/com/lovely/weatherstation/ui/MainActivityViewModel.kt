@@ -34,7 +34,7 @@ class MainActivityViewModel(
                         cityName = city.name,
                         weatherIconUrl = repository.getWeatherIconUrl(weather?.weatherStateAbbr),
                         weatherStateName = weather?.weatherStateName,
-                        temperature = weather?.temperature?.let { "${it.roundToInt()}°" }
+                        temperature = weather?.temperature?.let { "${it.roundToInt()}°" } // TODO use proper string resource
                     )
                 )
             }

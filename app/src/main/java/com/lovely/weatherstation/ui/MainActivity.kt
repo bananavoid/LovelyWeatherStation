@@ -15,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
@@ -81,16 +80,9 @@ fun CitiesWeatherContent(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier
-                .alpha(
-                    if (isLoading) {
-                        100f
-                    } else {
-                        0f
-                    }
-                )
-        )
+        if (isLoading) {
+            CircularProgressIndicator()
+        }
     }
 }
 
