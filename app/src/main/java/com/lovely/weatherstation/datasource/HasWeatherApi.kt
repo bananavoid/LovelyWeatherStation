@@ -16,7 +16,8 @@ interface HasWeatherApi {
         }
     }
 
+    // TODO see how we can load svg with coil
     fun getWeatherIconUrl(abbreviation: String?): String {
-        return "https://www.metaweather.com/api/static/img/weather/$abbreviation.svg"
+        return "https://www.metaweather.com/static/img/weather/png/64/$abbreviation.png"
     }
 }
