@@ -9,10 +9,8 @@ import com.lovely.weatherstation.datasource.Repository
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
@@ -52,7 +50,6 @@ class MainActivityViewModelTest {
 
     @After
     fun tearDown() {
-        Dispatchers.resetMain()
         testDispatcher.cleanupTestCoroutines()
     }
 }
