@@ -4,12 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -64,17 +68,23 @@ fun CitiesWeatherContent(
 ) {
     val forecasts by viewModel.forecasts.observeAsState(initial = emptyList())
     val isLoading by viewModel.isLoading.observeAsState(initial = true)
-    LazyColumn(
-        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
-    ) {
-        items(
-            items = forecasts,
-            itemContent = {
-                CityWeatherItem(
-                    uiModel = it
-                )
-            }
+
+    Column(
+        Modifier.padding(
+            PaddingValues(horizontal = 16.dp, vertical = 16.dp)
         )
+    ) {
+        Text(text = "Expected weather for tomorrow", style = MaterialTheme.typography.h4)
+        LazyColumn {
+            items(
+                items = forecasts,
+                itemContent = {
+                    CityWeatherItem(
+                        uiModel = it
+                    )
+                }
+            )
+        }
     }
     Box(
         contentAlignment = Alignment.Center,
