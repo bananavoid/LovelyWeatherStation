@@ -15,8 +15,8 @@ interface HasCityApi {
                 name = "Stockholm"
             ),
             City(
-                woeid = 2455882,
-                name = "MountainView"
+                woeid = 2455920,
+                name = "Mountain View"
             ),
             City(
                 woeid = 44418,

@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.lovely.weatherstation.api.RetrofitBuilder
 import com.lovely.weatherstation.datasource.Repository
 import com.lovely.weatherstation.ui.theme.WeatherStationTheme
+import kotlinx.coroutines.Dispatchers
 
 class MainActivity : ComponentActivity() {
 
@@ -27,7 +28,8 @@ class MainActivity : ComponentActivity() {
             ViewModelFactory(
                 date = "",
                 repository = Repository(
-                    RetrofitBuilder.weatherService
+                    weatherService = RetrofitBuilder.weatherService,
+                    dispatcher = Dispatchers.IO
                 )
             )
         ).get(MainActivityViewModel::class.java)
