@@ -11,7 +11,7 @@ interface HasWeatherApi {
         return weatherService.getWeatherForLocation(woeid = woeid)
     }
 
-    fun getWeatherIconUrl(abbreviation: String): String {
+    fun getWeatherIconUrl(abbreviation: String?): String {
         return "https://www.metaweather.com/api/static/img/weather/$abbreviation.svg"
     }
 }

@@ -8,7 +8,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
@@ -18,14 +19,17 @@ import com.lovely.weatherstation.ui.theme.WeatherStationTheme
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var viewModel: MainActivityViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(
+        val viewModel = ViewModelProvider(
             this,
-            ViewModelFactory(Repository(RetrofitBuilder.weatherService))
+            ViewModelFactory(
+                date = "",
+                repository = Repository(
+                    RetrofitBuilder.weatherService
+                )
+            )
         ).get(MainActivityViewModel::class.java)
 
         setContent {
@@ -51,15 +55,16 @@ fun WeatherStationApp(
 fun CitiesWeatherContent(
     viewModel: MainActivityViewModel
 ) {
-    val cityForecasts = remember { viewModel.cityForecasts.value }
+    val forecasts by viewModel.forecasts.observeAsState(initial = emptyList())
+
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
     ) {
         items(
-            items = cityForecasts.orEmpty(),
+            items = forecasts,
             itemContent = {
                 CityWeatherItem(
-                    viewModel = it
+                    uiModel = it
                 )
             }
         )
